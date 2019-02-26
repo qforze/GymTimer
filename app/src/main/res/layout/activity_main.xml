@@ -21,7 +21,7 @@
 
     <SeekBar
         android:id="@+id/seekBar"
-        android:layout_width="0dp"
+        android:layout_width="369dp"
         android:layout_height="54dp"
         android:layout_marginStart="54dp"
         android:layout_marginTop="81dp"
@@ -36,7 +36,6 @@
         android:layout_height="0dp"
         android:layout_marginTop="14dp"
         android:layout_marginBottom="15dp"
-        android:text="30:00"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:textSize="40sp"
@@ -69,7 +68,8 @@
         app:layout_constraintEnd_toStartOf="@+id/Go"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.537" />
+        app:layout_constraintVertical_bias="0.537"
+        android:tag="1" />
 
     <Button
         android:id="@+id/button2"
@@ -78,7 +78,8 @@
         android:onClick="setTime"
         android:text="30 sec"
         app:layout_constraintStart_toStartOf="@+id/button1"
-        app:layout_constraintTop_toBottomOf="@+id/button1" />
+        app:layout_constraintTop_toBottomOf="@+id/button1"
+        android:tag="2" />
 
     <Button
         android:id="@+id/button3"
@@ -87,7 +88,8 @@
         android:onClick="setTime"
         android:text="1 Min"
         app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        android:tag="3" />
 
     <Button
         android:id="@+id/button4"
@@ -99,7 +101,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/Go"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.537" />
+        app:layout_constraintVertical_bias="0.537"
+        android:tag="4" />
 
     <Button
         android:id="@+id/button5"
@@ -109,7 +112,8 @@
         android:onClick="setTime"
         android:text="2 Min"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/button4"
+        android:tag="5" />
 
     <Button
         android:id="@+id/button6"
@@ -118,5 +122,6 @@
         android:onClick="setTime"
         android:text="3 Min"
         app:layout_constraintStart_toStartOf="@+id/button5"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+        app:layout_constraintTop_toBottomOf="@+id/button5"
+        android:tag="6" />
 </android.support.constraint.ConstraintLayout>
