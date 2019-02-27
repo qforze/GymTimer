@@ -7,78 +7,31 @@ import android.net.Uri;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity {
 
+
+    Time timeClass;
     SeekBar seekBar;
-    TextView textView;
-    CountDownTimer timerActual;
-    CountDownTimer timerTextOnFinish;
-    int time;
-    int count;
-    long minutes;
-    long seconds;
-    boolean active;
     Ringtone r;
-    boolean alarm;
+    static TextView textView;
+    static CountDownTimer timerActual;
+    static CountDownTimer timerTextOnFinish;
+    static int time;
+    static int count;
+    static long minutes;
+    static long seconds;
+    static boolean active;
+    static boolean alarm;
 
-    public void setTime(View view) {
-
-        Integer[] newCount = {0, 15, 30, 60, 90, 120, 180};
-
-        String tag = view.getTag().toString();
-
-        int tagInt = Integer.parseInt(tag);
-
-        time = newCount[tagInt];
-
-        seekBar.setProgress(time);
-
-        slider(time);
-
-
-        if (active) {
-
-            timerActual.cancel();
-            active = false;
-
-        }
-    }
-    public void sliderTime() {
-
-        if (count == 0) {
-
-            textView.setText("Set Time");
-            alarm = true;
-
-        } else {
-
-            textView.setText("" + String.format("%d :%d", minutes, seconds - (minutes * 60)));
-
-        }
-
-    }
-
-    public void slider(int time) {
-
-        count = time * 1000;
-
-        minutes = TimeUnit.MILLISECONDS.toMinutes(count);
-        seconds = TimeUnit.MILLISECONDS.toSeconds(count);
-
-        sliderTime();
-
-    }
 
     public void onClick(View view) {
 
-        if (alarm == false) {
+        if (!alarm) {
 
             timerActual = new CountDownTimer(count, 1000) {
 
@@ -86,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
                     seekBar.setProgress((int) count / 1000);
 
-                    sliderTime();
+                    timeClass.sliderTime();
 
                     if (time == 0) {
 
@@ -110,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onFinish() {
 
-                            sliderTime();
+                            timeClass.sliderTime();
 
                             playFinishTune();
 
@@ -124,6 +77,28 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    public void setTime(View view) {
+
+        Integer[] newCount = {0, 15, 30, 60, 90, 120, 180};
+
+        String tag = view.getTag().toString();
+
+        int tagInt = Integer.parseInt(tag);
+
+        time = newCount[tagInt];
+
+        seekBar.setProgress(time);
+
+        timeClass.slider(time);
+
+        if (active) {
+
+            timerActual.cancel();
+            active = false;
+
+        }
     }
 
     public void playFinishTune() {
@@ -153,18 +128,20 @@ public class MainActivity extends AppCompatActivity {
         Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         r = RingtoneManager.getRingtone(getApplicationContext(), notification);
 
+        timeClass = new Time();
+
         seekBar = findViewById(R.id.seekBar);
-        seekBar.setMax(60);
+        seekBar.setMax(300);
         seekBar.setProgress(0);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-                time = progress * 5;
+                time = progress;
 
                 alarm = false;
 
-                slider(time);
+                timeClass.slider(time);
 
             }
 
